@@ -41,4 +41,7 @@ public class PaymentAccount implements PaymentAccountService {
     public void setCurrentBalance(int currentBalance) {
         this.currentBalance = currentBalance;
     }
+    public String toString(){
+        return "Платежный счет в банке " + bankName + ", баланс - " + currentBalance + " руб.";
+    }
 }

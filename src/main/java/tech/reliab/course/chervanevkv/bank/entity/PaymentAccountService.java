@@ -9,4 +9,5 @@ public interface PaymentAccountService {
     public void setBankName(String bankName);
     public int getCurrentBalance();
     public void setCurrentBalance(int currentBalance);
+    public String toString();
 }

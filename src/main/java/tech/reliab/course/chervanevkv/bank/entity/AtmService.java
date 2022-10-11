@@ -23,4 +23,5 @@ public interface AtmService {
     public void setMoneyCount(double moneyCount);
     public double getServicePrice();
     public void setServicePrice(double servicePrice);
+    public String toString();
 }

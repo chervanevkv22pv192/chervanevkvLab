@@ -101,4 +101,16 @@ public class BankAtm implements AtmService {
     public void setServicePrice(double servicePrice) {
         this.servicePrice = servicePrice;
     }
+
+    public String toString(){
+        String statusMeaning = "";
+        if(status == -1) statusMeaning = "нет наличных для выдачи";
+        else if(status == 0) statusMeaning = "не работает";
+        else statusMeaning = "работает в штатном режиме";
+        return "Банкомат " + name + " по адресу " + address + ", "
+                + statusMeaning + (isAbleToAcceptMoney? ", " : ", не ") + "принимет наличные"
+                + (isAbleToGiveMoney? ", " : ", не ") + "выдает наличные"
+                + ", банкомат может выдать до " + moneyCount + " руб."
+                + ", цена обслуживания банкомата - " + servicePrice + " руб.";
+    }
 }

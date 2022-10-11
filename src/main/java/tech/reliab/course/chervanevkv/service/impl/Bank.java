@@ -28,6 +28,9 @@ public class Bank implements BankService{
         bankRating = rand.nextInt() % 100;
         moneyCount = rand.nextInt() % 1000000;
         percentage = (101-bankRating)/10.0 + 10.0/rand.nextDouble();
+        bankRating = bankRating<0?bankRating*(-1):bankRating;
+        moneyCount = moneyCount<0?moneyCount*(-1):moneyCount;
+        percentage = percentage<0?percentage*(-1):percentage;
     }
 
     public BankOffice createOffice(
@@ -122,7 +125,7 @@ public class Bank implements BankService{
         Calendar ending = Calendar.getInstance();
         ending.setTime(start);
         ending.add(Calendar.MONTH, monthsCount);
-        acc.setEndingDate(ending.getTime());
+        acc.setEndingDate(new java.sql.Date(ending.getTime().getYear(), ending.getTime().getMonth(), ending.getTime().getDay()));
         acc.setCountOfCreditPeriodMonths(monthsCount);
         acc.setCreditSumm(creditSumm);
         acc.setMonthlyPayment(creditSumm/monthsCount);
@@ -198,5 +201,14 @@ public class Bank implements BankService{
 
     public void setCurrentATMsCount(int currentATMsCount) {
         this.currentATMsCount = currentATMsCount;
+    }
+
+    public String toString() {
+        return "Банк " + name + ": " + officesCount
+                + " офисов, " + employeeCount + " работников, "
+                + " процентная ставка - " + percentage + "% годовых, "
+                + clientsCount + " клиентов, #" + bankRating
+                + " в рейтинге, " + moneyCount + " руб. в банке, "
+                + currentATMsCount + " банкоматов.";
     }
 }

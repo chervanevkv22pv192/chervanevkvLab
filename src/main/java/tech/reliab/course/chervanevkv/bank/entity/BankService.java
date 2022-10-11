@@ -43,4 +43,5 @@ public interface BankService {
     public void setPercentage(double percentage);
     public int getCurrentATMsCount();
     public void setCurrentATMsCount(int currentATMsCount);
+    public String toString();
 }

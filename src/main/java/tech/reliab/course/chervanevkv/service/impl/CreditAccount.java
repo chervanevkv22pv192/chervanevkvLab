@@ -106,4 +106,11 @@ public class CreditAccount implements CreditAccountService {
     public void setUserPayAccountNumber(int userPayAccountNumber) {
         this.userPayAccountNumber = userPayAccountNumber;
     }
+    public String toString(){
+        return "Кредитный счет в банке " + bankName + ", оформленный на "
+                + countOfCreditPeriodMonths + " месяцев, с "
+                + beginningDate.toString() + " по " + endingDate.toString()
+                + ", на сумму " + creditSumm + " под " + percentage + "% годовых"
+                + ", ежемесячный платеж - " + monthlyPayment;
+    }
 }

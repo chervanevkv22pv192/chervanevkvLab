@@ -25,4 +25,5 @@ public interface CreditAccountService {
     public void setCarryingEmployeeID(int carryingEmployeeID);
     public int getUserPayAccountNumber();
     public void setUserPayAccountNumber(int userPayAccountNumber);
+    public String toString();
 }

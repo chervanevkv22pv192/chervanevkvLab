@@ -21,4 +21,5 @@ public interface UserService {
     public void setPaymentAccountsId(int[] paymentAccountsId);
     public int getCreditRating();
     public void setCreditRating(int creditRating);
+    public String toString();
 }

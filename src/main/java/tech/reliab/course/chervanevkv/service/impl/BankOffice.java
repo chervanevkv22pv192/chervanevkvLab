@@ -114,4 +114,14 @@ public class BankOffice implements BankOfficeService {
     public void setRentPrice(double rentPrice) {
         this.rentPrice = rentPrice;
     }
+    public String toString(){
+        return "Офис " + name + " по адресу " + address
+                + (status? ", работает" : ", не работает")
+                + (canAddATM? ", может разместить банкомат" : ", нет места для банкомата")
+                + (creditsAvailable? ", выдает кредиты" : ", кредиты недоступны")
+                + (givesMoney? ", выдает наличные" : "не выдает наличные")
+                + (acceptsMoney? ", принимает наличные" : "не принимает наличные")
+                + ", количество денег в офисе - " + moneyCount + " руб."
+                + ", стоимость аренды - " + rentPrice + " руб.";
+    }
 }

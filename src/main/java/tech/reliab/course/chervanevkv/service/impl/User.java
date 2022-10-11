@@ -20,7 +20,8 @@ public class User implements UserService {
         Random rand = new Random();
         salary = rand.nextInt()%10000;
         creditRating = rand.nextInt()%(int)(salary/10);
-
+        salary = salary<0?salary*(-1):salary;
+        creditRating = creditRating<0?creditRating*(-1):creditRating;
     }
 
     public int getId() {
@@ -93,5 +94,10 @@ public class User implements UserService {
 
     public void setCreditRating(int creditRating) {
         this.creditRating = creditRating;
+    }
+    public String toString(){
+        return "Клиент по имени " + name + ", дата рождения - " + b_day.toString()
+                + ", место работы - " + workPlace + ", ежемесячный доход - " + salary
+                + ", кредитный рейтинг - #" + creditRating;
     }
 }

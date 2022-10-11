@@ -21,4 +21,5 @@ public interface EmployeeService {
     public void setAllowedToGiveCredits(boolean allowedToGiveCredits);
     public double getSalary();
     public void setSalary(double salary);
+    public String toString();
 }

@@ -25,4 +25,5 @@ public interface BankOfficeService {
     public void setMoneyCount(double moneyCount);
     public double getRentPrice();
     public void setRentPrice(double rentPrice);
+    public String toString();
 }

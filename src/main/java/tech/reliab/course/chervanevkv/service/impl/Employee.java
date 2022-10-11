@@ -88,4 +88,11 @@ public class Employee implements EmployeeService {
     public void setSalary(double salary) {
         this.salary = salary;
     }
+
+    public String toString(){
+        return "Сотрудник по имени " + name + ", дата рождения - " + b_day.toString()
+                + ", должность - " + job + (isWorkingOnline? ", работает удаленно" : ", работает в офисе")
+                + (allowedToGiveCredits? ", уполномочен выдавать кредиты" : ", кредиты не выдает")
+                + ", заработная плата - " + salary + " руб./мес.";
+    }
 }
