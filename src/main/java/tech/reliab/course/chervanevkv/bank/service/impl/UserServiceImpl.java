@@ -1,10 +1,14 @@
 package tech.reliab.course.chervanevkv.bank.service.impl;
 
+import tech.reliab.course.chervanevkv.bank.entity.CreditAccount;
+import tech.reliab.course.chervanevkv.bank.entity.PaymentAccount;
 import tech.reliab.course.chervanevkv.bank.entity.User;
 import tech.reliab.course.chervanevkv.bank.entity.Bank;
 import tech.reliab.course.chervanevkv.bank.service.UserService;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class UserServiceImpl implements UserService {
@@ -32,8 +36,8 @@ public class UserServiceImpl implements UserService {
                 job,
                 salary,
                 bank,
-                null,
-                null,
+                new ArrayList<>(),
+                new ArrayList<>(),
                 salary / 10
         );
         bank.setNumberOfClients(bank.getNumberOfClients()+1);

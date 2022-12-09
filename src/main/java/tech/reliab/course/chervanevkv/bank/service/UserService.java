@@ -1,9 +1,12 @@
 package tech.reliab.course.chervanevkv.bank.service;
 
+import tech.reliab.course.chervanevkv.bank.entity.CreditAccount;
+import tech.reliab.course.chervanevkv.bank.entity.PaymentAccount;
 import tech.reliab.course.chervanevkv.bank.entity.User;
 import tech.reliab.course.chervanevkv.bank.entity.Bank;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 public interface UserService {

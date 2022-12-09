@@ -3,16 +3,26 @@ package tech.reliab.course.chervanevkv.bank.entity;
 import tech.reliab.course.chervanevkv.bank.entity.parentClasses.Person;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class User extends Person {
     String job;
     double salary;
     Bank bank;
-    CreditAccount creditAccount;
-    PaymentAccount paymentAccount;
+    List<CreditAccount> creditAccount;
+    List<PaymentAccount> paymentAccount;
     double creditRating;
 
-    public User() {}
+    public User(Long id, String firstName, String lastName, LocalDate birthDate, String job, double salary, Bank bank, List<CreditAccount> creditAccs, List<PaymentAccount> payAccs, double creditRating) {
+        super(id, firstName, lastName, birthDate);
+        this.job = job;
+        this.salary = salary;
+        this.bank = bank;
+        this.creditAccount = new ArrayList<>();
+        this.paymentAccount = new ArrayList<>();
+        this.creditRating = creditRating;
+    }
 
     public User(Long id, String firstName, String lastName, LocalDate birthDate, String job,
                 double salary, Bank bank, CreditAccount creditAccount,
@@ -21,8 +31,8 @@ public class User extends Person {
         this.job = job;
         this.salary = salary;
         this.bank = bank;
-        this.creditAccount = creditAccount;
-        this.paymentAccount = paymentAccount;
+        this.creditAccount = new ArrayList<>();
+        this.paymentAccount = new ArrayList<>();
         this.creditRating = creditRating;
     }
 
@@ -33,8 +43,8 @@ public class User extends Person {
         this.job = job;
         this.salary = salary;
         this.bank = bank;
-        this.creditAccount = creditAccount;
-        this.paymentAccount = paymentAccount;
+        this.creditAccount = new ArrayList<>();
+        this.paymentAccount = new ArrayList<>();
         this.creditRating = creditRating;
     }
 
@@ -76,20 +86,21 @@ public class User extends Person {
         this.bank = bank;
     }
 
-    public CreditAccount getCreditAccount() {
+    public List<CreditAccount> getCreditAccount() {
         return creditAccount;
     }
-
     public void setCreditAccount(CreditAccount creditAccount) {
-        this.creditAccount = creditAccount;
+        if(this.creditAccount==null)
+            this.creditAccount = new ArrayList<>();
+        this.creditAccount.add(creditAccount);
     }
-
-    public PaymentAccount getPaymentAccount() {
+    public List<PaymentAccount> getPaymentAccount() {
         return paymentAccount;
     }
-
     public void setPaymentAccount(PaymentAccount paymentAccount) {
-        this.paymentAccount = paymentAccount;
+        if(this.paymentAccount==null)
+            this.paymentAccount = new ArrayList<>();
+        this.paymentAccount.add(paymentAccount);
     }
 
     public double getCreditRating() {
@@ -102,6 +113,14 @@ public class User extends Person {
 
     @Override
     public String toString() {
+        String credits = "";
+        String payments = "";
+        for(var c: this.creditAccount){
+            credits+=c.getId()+" ";
+        }
+        for(var p: this.paymentAccount){
+            payments+=p.getId()+" ";
+        }
         return "User{" +
                 "id=" + super.getId() +
                 ", fullName='" + super.getFullName() + '\'' +
@@ -109,8 +128,8 @@ public class User extends Person {
                 ", job='" + job + '\'' +
                 ", salary=" + salary +
                 ", bank_id=" + bank.getId() +
-                ", creditAccountId=" + creditAccount.getId() +
-                ", paymentAccountId=" + paymentAccount.getId() +
+                ", creditAccountId=" + credits +
+                ", paymentAccountId=" + payments +
                 ", creditRating=" + creditRating +
                 '}';
     }
