@@ -89,8 +89,8 @@ public class Main {
                     employeesList.get(j).add(employeeService.create("Worker", "#" + k, LocalDate.now(), "job", bankList.get(j), bankOfficeList.get(j).get(i), 10000. + 1000 * k));
                     userList.get(j).add(userService.create("Name", "Surname" + i, LocalDate.now(), "job", bankList.get(j)));
                     for (int t = 0; t < 2; t++) {
-                        paymentAccountList.get(j).add(paymentAccountService.create(userList.get(j).get(k), bankList.get(j).getName()));
-                        creditAccountList.get(j).add(creditAccountService.create(userList.get(j).get(k),bankList.get(j),LocalDate.now(),LocalDate.now(),12,12,1,employeesList.get(j).get(0),paymentAccountList.get(j).get(t)));
+                        paymentAccountList.get(j).add(paymentAccountService.create(userList.get(j).get(k+i*5), bankList.get(j).getName()));
+                        creditAccountList.get(j).add(creditAccountService.create(userList.get(j).get(k+i*5),bankList.get(j),LocalDate.now(),LocalDate.now(),12,12,1,employeesList.get(j).get(0),paymentAccountList.get(j).get(t)));
                     }
                 }
                 atmList.get(j).add(atmService.create("atm#" + i, bankList.get(j), bankOfficeList.get(j).get(0), employeesList.get(j).get(0), 1000.));
