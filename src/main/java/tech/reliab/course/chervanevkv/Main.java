@@ -85,10 +85,9 @@ public class Main {
             if((user.getCreditRating() < 5000) && (bank.getRating() > 50)){
                 throw new BankRefusedLoanRequestFromUserException("Your credit rating is " + user.getCreditRating() + " and the bank's rating is " +bank.getRating() + ", according to this, the bank refused your request.");
             }
-            PaymentAccount payAcc;
             if(!user.getBanks().contains(bank)){
                 bankService.addUser(bank, user);
-                payAcc = paymentAccountService.create(user,bank);
+                paymentAccountService.create(user,bank);
             }
             int month = (LocalDate.now().getMonthValue()+6)%12;
             CreditAccount creditAccount = creditAccountService.create(
