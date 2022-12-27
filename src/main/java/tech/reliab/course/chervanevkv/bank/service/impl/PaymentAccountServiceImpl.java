@@ -1,57 +1,41 @@
 package tech.reliab.course.chervanevkv.bank.service.impl;
 
+import tech.reliab.course.chervanevkv.bank.entity.Bank;
 import tech.reliab.course.chervanevkv.bank.entity.User;
 import tech.reliab.course.chervanevkv.bank.entity.PaymentAccount;
 import tech.reliab.course.chervanevkv.bank.service.PaymentAccountService;
 
 public class PaymentAccountServiceImpl implements PaymentAccountService {
-    private Long id = 0L;
-    private PaymentAccount paymentAccount;
+    private static  PaymentAccountServiceImpl INSTANCE;
 
-    /**
-     *
-     * @param user - клиент
-     * @param bankName - имя банка
-     * @return - возвращает созданный объект платежный счет
-     */
+    private PaymentAccountServiceImpl(){}
+
+    public static PaymentAccountServiceImpl getInstance(){
+        if (INSTANCE==null){
+            INSTANCE = new PaymentAccountServiceImpl();
+        }
+        return INSTANCE;
+    }
+
+    private Long id = 0L;
+
+
     @Override
-    public PaymentAccount create(User user, String bankName){
-        paymentAccount = new PaymentAccount(
+    public PaymentAccount create(User user, Bank bank){
+        var paymentAccount = new PaymentAccount(
                 ++id,
                 user,
-                bankName,
+                bank,
                 0
         );
-        user.setPaymentAccount(paymentAccount);
-        return paymentAccount;
-    }
-
-    /**
-     *
-     * @return - возвращает платежный счет
-     */
-    @Override
-    public PaymentAccount read(){
-        return paymentAccount;
-    }
-
-    /**
-     *
-     * @param paymentAccount - новый платежный счет
-     */
-    @Override
-    public void update(PaymentAccount paymentAccount){
-        this.paymentAccount = paymentAccount;
-    }
-
-    /**
-     *
-     * @param paymentAccount - платежный счет для удаления
-     */
-    @Override
-    public void delete(PaymentAccount paymentAccount){
-        if(this.paymentAccount == paymentAccount){
-            this.paymentAccount = null;
+        if(!user.getBanks().contains(bank)){
+            user.addBank(bank);
         }
+        user.getPaymentAccounts().add(paymentAccount);
+        return paymentAccount;
     }
+
+
+
+
 }

@@ -17,12 +17,12 @@ public class CreditAccount {
 
     public CreditAccount() {}
 
-    public CreditAccount(Long id, User user, String bankName, LocalDate start,
+    public CreditAccount(Long id, User user, Bank bankName, LocalDate start,
                          LocalDate end, int monthNumber, double sum, double monthPayment,
                          double interestRate, Employee employee, PaymentAccount paymentAccount) {
         this.id = id;
         this.user = user;
-        this.bankName = bankName;
+        this.bankName = bankName.getName();
         this.start = start;
         this.end = end;
         this.monthNumber = monthNumber;

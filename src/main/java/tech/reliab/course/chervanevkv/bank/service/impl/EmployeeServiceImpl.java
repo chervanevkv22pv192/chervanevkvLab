@@ -8,25 +8,23 @@ import tech.reliab.course.chervanevkv.bank.service.EmployeeService;
 import java.time.LocalDate;
 
 public class EmployeeServiceImpl implements EmployeeService {
+    private static  EmployeeServiceImpl INSTANCE;
+
+    private EmployeeServiceImpl(){}
+
+    public static EmployeeServiceImpl getInstance(){
+        if (INSTANCE==null){
+            INSTANCE = new EmployeeServiceImpl();
+        }
+        return INSTANCE;
+    }
 
     private Long id = 0L;
-    private Employee employee;
 
-    /**
-     *
-     * @param firstName - имя
-     * @param lastName - фамилия
-     * @param birthDate - дата рождения сотрудника
-     * @param job - должность
-     * @param bank - банк
-     * @param bankOffice - офис банка
-     * @param salary - зарплата
-     * @return - возвращает созданный объект сотрудника
-     */
     @Override
     public Employee create(String firstName, String lastName, LocalDate birthDate,
                            String job, Bank bank, BankOffice bankOffice, double salary){
-        employee = new Employee(
+        var employee = new Employee(
                 ++id,
                 firstName,
                 lastName,
@@ -38,26 +36,14 @@ public class EmployeeServiceImpl implements EmployeeService {
                 true,
                 salary
         );
-        bank.setNumberOfEmployees(bank.getNumberOfEmployees()+1);
+        bank.getEmployees().add(employee);
         return employee;
     }
 
-    /**
-     *
-     * @param firstName - имя
-     * @param lastName - фамилия
-     * @param patronymic - отчество
-     * @param birthDate - дата рождения сотрудника
-     * @param job - должность
-     * @param bank - банк
-     * @param bankOffice - офис банка
-     * @param salary - зарплата
-     * @return - возвращает созданный объект сотрудника
-     */
     @Override
     public Employee create(String firstName, String lastName, String patronymic, LocalDate birthDate,
-            String job, Bank bank, BankOffice bankOffice, double salary){
-        employee = new Employee(
+                           String job, Bank bank, BankOffice bankOffice, double salary){
+        var employee = new Employee(
                 ++id,
                 firstName,
                 lastName,
@@ -70,37 +56,8 @@ public class EmployeeServiceImpl implements EmployeeService {
                 true,
                 salary
         );
-        bank.setNumberOfEmployees(bank.getNumberOfEmployees()+1);
+        bank.getEmployees().add(employee);
         return employee;
-    }
-
-    /**
-     *
-     * @return - возвращает объект сотрудник
-     */
-    @Override
-    public Employee read(){
-        return employee;
-    }
-
-    /**
-     *
-     * @param employee - новый сотрудник
-     */
-    @Override
-    public void update(Employee employee){
-        this.employee = employee;
-    }
-
-    /**
-     *
-     * @param employee - сотрудник для удаления
-     */
-    @Override
-    public void delete(Employee employee){
-        if(this.employee == employee){
-            this.employee = null;
-        }
     }
 
 }

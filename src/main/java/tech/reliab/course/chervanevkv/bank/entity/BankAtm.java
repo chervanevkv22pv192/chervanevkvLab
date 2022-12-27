@@ -140,14 +140,10 @@ public class BankAtm {
     public String toString() {
         return "BankAtm{" +
                 "id=" + id +
-                ", bank_id=" + bank.getId() +
                 ", office=" + bankOffice.getName() +
                 ", employee=" + employee.getFullName() +
                 ", name='" + name + '\'' +
                 ", status=" + status +
-                ", address='" + address + '\'' +
-                ", canPaymentOfMoney=" + canPaymentOfMoney +
-                ", canDepositMoney=" + canDepositMoney +
                 ", moneyAmount=" + moneyAmount +
                 ", maintenance=" + maintenance +
                 '}';

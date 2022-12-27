@@ -6,29 +6,26 @@ import tech.reliab.course.chervanevkv.bank.service.CreditAccountService;
 import java.time.LocalDate;
 
 public class CreditAccountServiceImpl implements CreditAccountService {
-    private Long id = 0L;
-    private CreditAccount creditAccount;
+    private static  CreditAccountServiceImpl INSTANCE;
 
-    /**
-     *
-     * @param user - клиент
-     * @param bank - банк
-     * @param start - дата начала кредита
-     * @param end - дата окончания кредита
-     * @param month - кол-во месяцев
-     * @param sum - сумма кредита
-     * @param monthPayment - ежемесячный платеж
-     * @param employee - сотрудник выдавший кредит
-     * @param paymentAccount - платежный счет
-     * @return - возвращает созданный кредитный счет
-     */
+    private CreditAccountServiceImpl(){}
+
+    public static CreditAccountServiceImpl getInstance(){
+        if (INSTANCE==null){
+            INSTANCE = new CreditAccountServiceImpl();
+        }
+        return INSTANCE;
+    }
+    private Long id = 0L;
+
+
     @Override
     public CreditAccount create(User user, Bank bank, LocalDate start, LocalDate end, int month,
                                 double sum, double monthPayment, Employee employee, PaymentAccount paymentAccount){
-        creditAccount = new CreditAccount(
+        var creditAccount = new CreditAccount(
                 ++id,
                 user,
-                bank.getName(),
+                bank,
                 start,
                 end,
                 month,
@@ -38,36 +35,8 @@ public class CreditAccountServiceImpl implements CreditAccountService {
                 employee,
                 paymentAccount
         );
-        user.setCreditAccount(creditAccount);
+        user.getCreditAccounts().add(creditAccount);
         return creditAccount;
     }
 
-    /**
-     *
-     * @return - возвращает объект кредитный счет
-     */
-    @Override
-    public CreditAccount read(){
-        return creditAccount;
-    }
-
-    /**
-     *
-     * @param creditAccount - новый кредитный счет
-     */
-    @Override
-    public void update(CreditAccount creditAccount){
-        this.creditAccount = creditAccount;
-    }
-
-    /**
-     *
-     * @param creditAccount - кредитный счет для удаления
-     */
-    @Override
-    public void delete(CreditAccount creditAccount){
-        if(this.creditAccount == creditAccount){
-            this.creditAccount = null;
-        }
-    }
 }

@@ -10,9 +10,46 @@ import java.util.List;
 
 
 public interface UserService {
-    User create(String firstName, String lastName, LocalDate birthDate, String job, Bank bank);
-    User create(String firstName, String lastName, String patronymic, LocalDate birthDate, String job, Bank bank);
-    User read();
-    void update(User user);
-    void delete(User user);
+    /**
+     *
+     * @param firstName - им€
+     * @param lastName - фамили€
+     * @param birthDate - дата рождени€ клиента
+     * @param job - место работы
+     * @return - возвращает созданный объект клиент
+     */
+    User create(String firstName, String lastName, LocalDate birthDate, String job);
+    /**
+     *
+     * @param firstName - им€
+     * @param lastName - фамили€
+     * @param patronymic - отчество
+     * @param birthDate - дата рождени€ клиента
+     * @param job - место работы
+     * @return - возвращает созданный объект клиент
+     */
+    User create(String firstName, String lastName, String patronymic, LocalDate birthDate, String job);
+
+    /**
+     * выводит на экран информацию о пользователе
+     * @param user - id пользовател€
+     */
+    void outputUserInfo(User user);
+
+    /**
+     * ƒобавл€ет банк в список банков, которыми пользуетс€ клиент
+     * @param user - клиент
+     * @param bank - банк
+     */
+    void addBank(User user, Bank bank);
+
+    /**
+     * ”дал€ет банк из списка банков, которыми пользуетс€ клиент
+     * @param user - клиент
+     * @param bank - банк
+     */
+    void deleteBank(User user, Bank bank);
+
+
+
 }

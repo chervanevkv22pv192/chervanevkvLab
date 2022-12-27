@@ -104,13 +104,10 @@ public class Employee extends Person {
     public String toString() {
         return "Employee{" +
                 "id=" + super.getId() +
-                ", bank_id=" + bank.getId() +
                 ", office=" + bankOffice.getName() +
                 ", fullName='" + super.getFullName() + '\'' +
                 ", birthDate=" + super.getBirthDate() +
                 ", job='" + job + '\'' +
-                ", workInOffice=" + workInOffice +
-                ", canApplyLoan=" + canApplyLoan +
                 ", salary=" + salary +
                 '}';
     }

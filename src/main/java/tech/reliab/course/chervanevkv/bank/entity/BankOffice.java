@@ -1,12 +1,19 @@
 package tech.reliab.course.chervanevkv.bank.entity;
 
+import tech.reliab.course.chervanevkv.bank.entity.Bank;
+import tech.reliab.course.chervanevkv.bank.entity.BankAtm;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class BankOffice {
+    Long id;
     Bank bank;
     String name;
     String address;
     boolean isWorking;
     boolean isPossiblePlaceAtm;
-    int atmNumber = 0;
+    List<BankAtm> atms = new ArrayList<>();
     boolean canApplyLoan;
     boolean canPaymentOfMoney;
     boolean canDepositMoney;
@@ -15,16 +22,16 @@ public class BankOffice {
 
     public BankOffice() {}
 
-    public BankOffice(Bank bank, String name, String address, boolean isWorking,
-                      boolean isPossiblePlaceAtm, int atmNumber, boolean canApplyLoan,
+    public BankOffice(Long id, Bank bank, String name, String address, boolean isWorking,
+                      boolean isPossiblePlaceAtm, boolean canApplyLoan,
                       boolean canPaymentOfMoney, boolean canDepositMoney, double moneyAmount,
                       double rent) {
+        this.id = id;
         this.bank = bank;
         this.name = name;
         this.address = address;
         this.isWorking = isWorking;
         this.isPossiblePlaceAtm = isPossiblePlaceAtm;
-        this.atmNumber = atmNumber;
         this.canApplyLoan = canApplyLoan;
         this.canPaymentOfMoney = canPaymentOfMoney;
         this.canDepositMoney = canDepositMoney;
@@ -33,12 +40,13 @@ public class BankOffice {
     }
 
     public BankOffice(BankOffice bankOffice) {
+        this.id = bankOffice.getId();
         this.bank = bankOffice.getBank();
         this.name = bankOffice.getName();
         this.address = bankOffice.getAddress();
         this.isWorking = bankOffice.isWorking();
         this.isPossiblePlaceAtm = bankOffice.isPossiblePlaceAtm();
-        this.atmNumber = bankOffice.getAtmNumber();
+        this.atms = bankOffice.getAtms();
         this.canApplyLoan = bankOffice.isCanApplyLoan();
         this.canPaymentOfMoney = bankOffice.isCanPaymentOfMoney();
         this.canDepositMoney = bankOffice.isCanDepositMoney();
@@ -46,12 +54,20 @@ public class BankOffice {
         this.rent = bankOffice.getRent();
     }
 
-    public Bank getBank() {
-        return bank;
+    public Long getId() {
+        return id;
     }
 
-    public void setId(Bank bank) {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setBank(Bank bank) {
         this.bank = bank;
+    }
+
+    public Bank getBank() {
+        return bank;
     }
 
     public String getName() {
@@ -84,14 +100,6 @@ public class BankOffice {
 
     public void setPossiblePlaceAtm(boolean possiblePlaceAtm) {
         isPossiblePlaceAtm = possiblePlaceAtm;
-    }
-
-    public int getAtmNumber() {
-        return atmNumber;
-    }
-
-    public void setAtmNumber(int atmNumber) {
-        this.atmNumber = atmNumber;
     }
 
     public boolean isCanApplyLoan() {
@@ -134,18 +142,23 @@ public class BankOffice {
         this.rent = rent;
     }
 
+    public List<BankAtm> getAtms() {
+        return atms;
+    }
+
+    public void setAtms(List<BankAtm> atms) {
+        this.atms = atms;
+    }
+
     @Override
     public String toString() {
         return "BankOffice{" +
-                "bank_id=" + bank.getId() +
+                "id=" + id +
+                ", bank_id=" + bank.getId() +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", isWorking=" + isWorking +
-                ", isPossiblePlaceAtm=" + isPossiblePlaceAtm +
-                ", atmNumber=" + atmNumber +
-                ", canApplyLoan=" + canApplyLoan +
-                ", canPaymentOfMoney=" + canPaymentOfMoney +
-                ", canDepositMoney=" + canDepositMoney +
+                ", atmNumber=" + atms.size() +
                 ", moneyAmount=" + moneyAmount +
                 ", rent=" + rent +
                 '}';

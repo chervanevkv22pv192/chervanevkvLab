@@ -1,66 +1,68 @@
 package tech.reliab.course.chervanevkv.bank.service.impl;
 
+import tech.reliab.course.chervanevkv.bank.entity.BankAtm;
 import tech.reliab.course.chervanevkv.bank.entity.BankOffice;
 import tech.reliab.course.chervanevkv.bank.entity.Bank;
+import tech.reliab.course.chervanevkv.bank.exceptions.DeletingNULLObjectException;
+import tech.reliab.course.chervanevkv.bank.exceptions.IncorrectCreditSumException;
 import tech.reliab.course.chervanevkv.bank.service.BankOfficeService;
+
+import java.util.List;
 
 public class BankOfficeServiceImpl implements BankOfficeService {
 
-    private BankOffice bankOffice;
+    private static  BankOfficeServiceImpl INSTANCE;
 
-    /**
-     *
-     * @param name - имя офиса
-     * @param bank - банк офиса
-     * @param address - адрес офиса
-     * @param rent - стоимость аренды офиса
-     * @return - возвращает созданный объект офис
-     */
+    private BankOfficeServiceImpl(){}
+
+    public static BankOfficeServiceImpl getInstance(){
+        if (INSTANCE==null){
+            INSTANCE = new BankOfficeServiceImpl();
+        }
+        return INSTANCE;
+    }
+
+    Long id = 0L;
+
     @Override
     public BankOffice create(String name, Bank bank, String address, double rent){
-        bankOffice = new BankOffice(
+        var bankOffice = new BankOffice(
+                ++id,
                 bank,
                 name,
                 address,
                 true,
                 true,
-                bank.getNumberOfAtms(),
                 true,
                 true,
                 true,
                 bank.getMoneyAmount(),
                 rent
         );
-        bank.setNumberOfOffices(bank.getNumberOfOffices()+1);
+        bank.getOffices().add(bankOffice);
         return bankOffice;
     }
 
-    /**
-     *
-     * @return - возвращает объект офис
-     */
     @Override
-    public BankOffice read(){
-        return bankOffice;
+    public void addAtm(BankOffice office, BankAtm atm) {
+        office.getAtms().add(atm);
     }
 
-    /**
-     *
-     * @param bankOffice - новый объект
-     */
     @Override
-    public  void update(BankOffice bankOffice){
-        this.bankOffice = bankOffice;
-    }
-
-    /**
-     *
-     * @param bankOffice - офис для удалеия
-     */
-    @Override
-    public void delete(BankOffice bankOffice){
-        if(bankOffice == this.bankOffice){
-            this.bankOffice = null;
+    public void deleteAtm(BankOffice office, BankAtm atm) {
+        if(!office.getAtms().contains(atm)){
+            throw new DeletingNULLObjectException("Attempted to delete an object which is already deleted.");
         }
+        office.getAtms().remove(atm);
     }
+
+    @Override
+    public List<BankAtm> getAtmsForLoans(BankOffice office, double sum) {
+        if(sum < 0){
+            throw new IncorrectCreditSumException("Credit sum must be above zero.");
+        }
+        return office.getAtms().stream().filter(
+                atm-> atm.isCanPaymentOfMoney() && atm.getMoneyAmount() > sum).toList();
+    }
+
 }

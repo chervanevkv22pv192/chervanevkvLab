@@ -1,29 +1,25 @@
 package tech.reliab.course.chervanevkv.bank.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Bank {
     Long id;
     String name;
-    int numberOfOffices = 0;
-    int numberOfAtms = 0;
-    int numberOfEmployees = 0;
-    int numberOfClients = 0;
+    List<BankOffice> offices = new ArrayList<>();
+    List<BankAtm> atms = new ArrayList<>();
+    List<Employee> employees = new ArrayList<>();
+    List<User> users = new ArrayList<>();
     int rating;
     double moneyAmount;
     double interestRate;
 
-
-
     public Bank() {}
 
-    public Bank(Long id, String name, int numberOfOffices, int numberOfAtms,
-                int numberOfEmployees, int numberOfClients, int rating, double moneyAmount,
+    public Bank(Long id, String name, int rating, double moneyAmount,
                 double interestRate) {
         this.id = id;
         this.name = name;
-        this.numberOfOffices = numberOfOffices;
-        this.numberOfAtms = numberOfAtms;
-        this.numberOfEmployees = numberOfEmployees;
-        this.numberOfClients = numberOfClients;
         this.rating = rating;
         this.moneyAmount = moneyAmount;
         this.interestRate = interestRate;
@@ -32,10 +28,10 @@ public class Bank {
     public Bank(Bank bank) {
         this.id = bank.getId();
         this.name = bank.getName();
-        this.numberOfOffices = bank.getNumberOfOffices();
-        this.numberOfAtms = bank.getNumberOfAtms();
-        this.numberOfEmployees = bank.getNumberOfEmployees();
-        this.numberOfClients = bank.getNumberOfClients();
+        this.offices = bank.getOffices();
+        this.atms = bank.getAtms();
+        this.employees = bank.getEmployees();
+        this.users = bank.getUsers();
         this.rating = bank.getRating();
         this.moneyAmount = bank.getMoneyAmount();
         this.interestRate = bank.getInterestRate();
@@ -55,38 +51,6 @@ public class Bank {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getNumberOfOffices() {
-        return numberOfOffices;
-    }
-
-    public void setNumberOfOffices(int numberOfOffices) {
-        this.numberOfOffices = numberOfOffices;
-    }
-
-    public int getNumberOfAtms() {
-        return numberOfAtms;
-    }
-
-    public void setNumberOfAtms(int numberOfAtms) {
-        this.numberOfAtms = numberOfAtms;
-    }
-
-    public int getNumberOfEmployees() {
-        return numberOfEmployees;
-    }
-
-    public void setNumberOfEmployees(int numberOfEmployees) {
-        this.numberOfEmployees = numberOfEmployees;
-    }
-
-    public int getNumberOfClients() {
-        return numberOfClients;
-    }
-
-    public void setNumberOfClients(int numberOfClients) {
-        this.numberOfClients = numberOfClients;
     }
 
     public int getRating() {
@@ -113,15 +77,47 @@ public class Bank {
         this.interestRate = interestRate;
     }
 
+    public List<BankOffice> getOffices() {
+        return offices;
+    }
+
+    public void setOffices(List<BankOffice> offices) {
+        this.offices = offices;
+    }
+
+    public List<BankAtm> getAtms() {
+        return atms;
+    }
+
+    public void setAtms(List<BankAtm> atms) {
+        this.atms = atms;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
     @Override
     public String toString() {
         return "Bank{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", numberOfOffices=" + numberOfOffices +
-                ", numberOfAtms=" + numberOfAtms +
-                ", numberOfEmployees=" + numberOfEmployees +
-                ", numberOfClients=" + numberOfClients +
+                ", numberOfOffices=" + offices.size() +
+                ", numberOfAtms=" + atms.size() +
+                ", numberOfEmployees=" + employees.size() +
+                ", numberOfUsers=" + users.size() +
                 ", rating=" + rating +
                 ", moneyAmount=" + moneyAmount +
                 ", interestRate=" + interestRate +
