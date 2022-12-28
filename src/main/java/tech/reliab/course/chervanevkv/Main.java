@@ -96,12 +96,16 @@ public class Main {
             System.out.println("#"+b.getId()+". "+b.getName());
         }
         fromBankId = in.nextInt();
+        if((fromBankId<1)||(fromBankId>bankList.size()))
+            throw new ArrayIndexOutOfBoundsException("\n\nPlease, select a bank from the suggested ones.\n");
         System.out.println("\nChoose a bank you'd like to move accounts to:");
         for (var b:
                 bankList) {
             System.out.println("#"+b.getId()+". "+b.getName());
         }
         toBankId = in.nextInt();
+        if((toBankId<1)||(toBankId>bankList.size()))
+            throw new ArrayIndexOutOfBoundsException("\n\nPlease, select a bank from the suggested ones.\n");
         if(toBankId==fromBankId){
             System.out.println("The source bank and the destination bank should be different.");
         }
@@ -120,6 +124,9 @@ public class Main {
                     System.out.println("#"+employee.getId()+". "+employee);
             }
             int employeeId = in.nextInt();
+            long suggestedEmployeeMinId = bankList.get(toBankId).getEmployees().get(0).getId(), suggestedEmployeeMaxId = suggestedEmployeeMinId+bankList.get(toBankId).getEmployees().size()-1;
+            if((employeeId<suggestedEmployeeMinId)||(employeeId>suggestedEmployeeMaxId))
+                throw new ArrayIndexOutOfBoundsException("\n\nPlease, select an employee from the suggested ones.\n");
             JSONParser jsonParser = new JSONParser();
             JSONArray payAccsJSONArray = new JSONArray();
             JSONArray creditAccsJSONArray = new JSONArray();
