@@ -5,6 +5,10 @@ import tech.reliab.course.chervanevkv.bank.entity.User;
 import tech.reliab.course.chervanevkv.bank.entity.PaymentAccount;
 import tech.reliab.course.chervanevkv.bank.service.PaymentAccountService;
 
+import java.util.Iterator;
+import java.util.ListIterator;
+import java.util.Objects;
+
 public class PaymentAccountServiceImpl implements PaymentAccountService {
     private static  PaymentAccountServiceImpl INSTANCE;
 
@@ -34,8 +38,15 @@ public class PaymentAccountServiceImpl implements PaymentAccountService {
         user.getPaymentAccounts().add(paymentAccount);
         return paymentAccount;
     }
-
-
+    @Override
+    public void delete(User user, int accId){
+        Iterator<PaymentAccount> it = user.getPaymentAccounts().iterator();
+        while(it.hasNext()){
+            PaymentAccount acc = it.next();
+            if(acc.getId()==accId)
+                it.remove();
+        }
+    }
 
 
 }

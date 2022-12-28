@@ -4,6 +4,7 @@ import tech.reliab.course.chervanevkv.bank.entity.*;
 import tech.reliab.course.chervanevkv.bank.service.CreditAccountService;
 
 import java.time.LocalDate;
+import java.util.Iterator;
 
 public class CreditAccountServiceImpl implements CreditAccountService {
     private static  CreditAccountServiceImpl INSTANCE;
@@ -38,5 +39,12 @@ public class CreditAccountServiceImpl implements CreditAccountService {
         user.getCreditAccounts().add(creditAccount);
         return creditAccount;
     }
-
+    public void delete(User user, int accId){
+        Iterator<CreditAccount> it = user.getCreditAccounts().iterator();
+        while(it.hasNext()){
+            CreditAccount acc = it.next();
+            if(acc.getId()==accId)
+                it.remove();
+        }
+    }
 }

@@ -87,5 +87,5 @@ public interface BankService {
      * @return Возврашает сотрудников банка из данного офиса, которые могут выдать кредит
      */
     List<Employee> getEmployeesForLoans(Bank bank, BankOffice office);
-
+    public Employee getEmployeeById(Bank bank, int id);
 }

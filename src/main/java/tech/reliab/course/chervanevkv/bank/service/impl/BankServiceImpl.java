@@ -134,4 +134,12 @@ public class BankServiceImpl implements BankService {
                 emp -> emp.getBankOffice().getId().compareTo(office.getId())==0 && emp.isCanApplyLoan()).toList();
     }
 
+    public Employee getEmployeeById(Bank bank, int id){
+        for (var e:
+                bank.getEmployees()) {
+            if(e.getId()==id)
+                return  e;
+        }
+        throw new NoAvailableEmployeeException("There's no employee with id " + id);
+    }
 }

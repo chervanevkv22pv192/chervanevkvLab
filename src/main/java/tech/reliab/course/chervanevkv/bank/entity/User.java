@@ -1,5 +1,7 @@
 package tech.reliab.course.chervanevkv.bank.entity;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import tech.reliab.course.chervanevkv.bank.entity.parentClasses.Person;
 
 import java.time.LocalDate;
@@ -107,5 +109,48 @@ public class User extends Person {
                 ", banks=" + banks.stream().map(Bank::getName).toList() +
                 ", creditRating=" + creditRating +
                 '}';
+    }
+    public JSONArray getPayAccsAsJSONArray(String bankName){
+        JSONArray resultArray = new JSONArray();
+        for (var acc:
+                paymentAccounts) {
+            if(acc.getBank().getName().equals(bankName)){
+                JSONObject details = new JSONObject();
+                JSONObject result = new JSONObject();
+                details.put("id", acc.id);
+                details.put("user", "user");
+                details.put("bank", acc.getBank().getName());
+                details.put("sum", acc.sum);
+                result.put("payAcc", details);
+                resultArray.add(result);
+            }
+
+        }
+        return resultArray;
+    }
+    public JSONArray getCreditAccsAsJSONArray(String bankName){
+        JSONArray resultArray = new JSONArray();
+        for (var acc:
+                creditAccounts) {
+            if(acc.getBankName().equals(bankName)){
+                JSONObject details = new JSONObject();
+                JSONObject result = new JSONObject();
+                details.put("id", acc.id);
+                details.put("user", "user");
+                details.put("bank", acc.getBankName());
+                details.put("start", acc.start.toString());
+                details.put("end", acc.end.toString());
+                details.put("monthNumber", acc.monthNumber);
+                details.put("sum", acc.sum);
+                details.put("monthPayment",acc.monthPayment);
+                details.put("interestRate",acc.interestRate);
+                details.put("employeeId",acc.employee.getId());
+                details.put("paymentAccountId", acc.paymentAccount.getId());
+                result.put("creditAcc", details);
+                resultArray.add(result);
+            }
+
+        }
+        return resultArray;
     }
 }

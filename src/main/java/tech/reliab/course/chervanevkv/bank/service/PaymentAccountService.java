@@ -13,5 +13,5 @@ public interface PaymentAccountService {
      * @return - возвращает созданный объект платежный счет
      */
     PaymentAccount create(User user, Bank bank);
-
+    public void delete(User user, int accId);
 }

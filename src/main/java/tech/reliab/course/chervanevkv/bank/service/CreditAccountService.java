@@ -28,4 +28,5 @@ public interface CreditAccountService {
                          Employee employee,
                          PaymentAccount paymentAccount
     );
+    void delete(User user, int accId);
 }
